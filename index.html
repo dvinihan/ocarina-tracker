@@ -1,35 +1,65 @@
-<html>
-    <head>
-        <title>Ocarina of Time Item Tracker</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="style.css" type="text/css">
-        <script src="items.js"></script>
-        <script src="chests.js"></script>
-    </head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocarina of Time Item Tracker</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
 
-    <body>
-
-        <div id='layoutdiv'>
-            <div id='itemdiv' class='itemdiv'>
-            </div>
-            <div id='mapdiv' class='mapdiv'>
-                <div id='submapdiv' class='submapdiv'>
-                    <div align='center'><span id='submaparea' style="font-size:20px">Hyrule</span></div>
-                    <hr style="margin-top: 4px; margin-bottom: 4px">
-                    <ul onselectstart="return false" id='submaplist' style="margin-top: 4px; margin-bottom: 4px; overflow-y: auto; height: 232px;">
-                    </ul>
-                </div>
+    <div id="layoutdiv">
+        <div id="itemdiv" class="itemdiv"></div>
+        <div id="mapdiv" class="mapdiv">
+            <div id="submapdiv" class="submapdiv">
+                <div align="center"><span id="submaparea" style="font-size:20px">Hyrule</span></div>
+                <hr style="margin-top: 4px; margin-bottom: 4px">
+                <ul id="submaplist" style="margin-top: 4px; margin-bottom: 4px; overflow-y: auto; height: 232px;"></ul>
             </div>
         </div>
-        
-        <table id='itemconfig' class='itemconfig' style='display:none'></table>
+    </div>
+    
+    <!-- Settings Panel -->
+    <button id="settingsbutton" type="button">🔧</button>
+    <fieldset id="settings" class="settings">
+        <legend>Settings</legend>
+        <fieldset>
+            <legend>Item Tracker</legend>
+            <button type="button" id="btnEditMode">Edit Mode</button>
+            <br>
+            Size <input type="range" id="itemdivsize" name="itemdivsize" value="100" max="200" min="1">
+            <span id="itemdivsize-text">100%</span><br>
+            <input type="checkbox" id="showprizes" name="showprizes" checked>Show Medallion Locations<br>
+        </fieldset>
+        <fieldset>
+            <legend>Map Tracker</legend>
+            <input type="checkbox" id="showmap" name="showmap" checked>Enabled<br>
+            Size <input type="range" id="mapdivsize" name="mapdivsize" value="100" max="200" min="1">
+            <span id="mapdivsize-text">100%</span><br>
+            Position:
+            <input type="radio" name="mapposition" value="Below" checked>Below
+            <input type="radio" name="mapposition" value="Side">Side<br>
+            <fieldset>
+                <legend>Rainbow Bridge Logic</legend>
+                <input type="radio" name="ganonlogic" value="Open" checked>Open
+                <input type="radio" name="ganonlogic" value="Vanilla">Vanilla<br>
+                <input type="radio" name="ganonlogic" value="Medallions">Medallions<br>
+                <input type="radio" name="ganonlogic" value="Dungeons">Dungeons<br>
+            </fieldset>
+        </fieldset>
+        <fieldset>
+            <legend>Data Controls</legend>
+            <button type="button" id="btnResetTracker">Reset Progress</button>
+        </fieldset>
+    </fieldset>
+    
+    <table id="itemconfig" class="itemconfig" style="display:none"></table>
 
-       <script src="main.js"></script>
-        
-        <script>
-            initTracker();
-        </script>
-
-    </body>
+    <!-- Scripts organized by responsibility -->
+    <script src="storage.js"></script>
+    <script src="data.js"></script>
+    <script src="dungeons.js"></script>
+    <script src="logic.js"></script>
+    <script src="app.js"></script>
+</body>
 </html>
-
