@@ -1,4 +1,3 @@
-//var dungeonImg = ['Unknown', 'Slingshot0', 'Bombs0', 'Boomerang', 'Bow0', 'Hammer', 'Hookshot0', 'HoverBoots', 'MirrorShield']
 var dungeonImg = ['Unknown', 'dungeon1', 'dungeon2', 'dungeon3', 'dungeon4', 'dungeon5', 'dungeon6', 'dungeon7', 'dungeon8']
 ganonlogic = 'Open';
 
@@ -7,16 +6,12 @@ var itemLayout = [];
 
 var dungeonSelect = 0;
 
-var roomCreated = false;
-
 var chestsopenedInit = [];
 for(var i = 0; i < chests.length; i++) {
     chestsopenedInit.push(false);
 }
 
 var trackerOptions = {
-  showprizes: true,
-  editmode: false,
   selected: {}
 };
 
@@ -27,139 +22,6 @@ var trackerData = {
   chestsopened: chestsopenedInit
 };
 
-
-var cookiekeys = ['map', 'iZoom', 'mZoom', 'mOrien', 'mPos', 'glogic', 'prize', 'items'];
-var cookieDefault = {
-    map:1,
-    iZoom:100,
-    mZoom:100,
-    mPos:0,
-    glogic:'Open',
-    prize:1,
-    items:defaultItemGrid
-}
-
-var cookielock = false;
-
-function setCookie(obj) {
-    var d = new Date();
-    d.setTime(d.getTime() + (365 * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    var val = JSON.stringify(obj);
-    document.cookie = "key=" + val + ";" + expires + ";path=/";
-}
-
-function getConfigObjectFromCookie() {
-
-    var name = "key=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return JSON.parse(c.substring(name.length, c.length));
-        }
-    }
-    return {};
-}
-
-function loadCookie() {
-    if (cookielock)
-        return;
-
-    cookielock = true;
-
-    cookieobj = getConfigObjectFromCookie();
-    setConfigObject(cookieobj);
-
-    cookielock = false;
-}
-
-function setConfigObject(configobj)
-{
-    cookiekeys.forEach(function (key) {
-        if (configobj[key] === undefined) {
-            configobj[key] = cookieDefault[key];
-        }
-    });
-
-    initGridRow(JSON.parse(JSON.stringify(configobj.items)));
-
-    document.getElementsByName('showmap')[0].checked = !!configobj.map;
-    document.getElementsByName('showmap')[0].onchange();
-    document.getElementsByName('itemdivsize')[0].value = configobj.iZoom;
-    document.getElementsByName('itemdivsize')[0].onchange();
-    document.getElementsByName('mapdivsize')[0].value = configobj.mZoom;
-    document.getElementsByName('mapdivsize')[0].onchange();
-
-    document.getElementsByName('mapposition')[configobj.mPos].click();
-
-    document.getElementsByName('showprizes')[0].checked = !!configobj.prize;
-    document.getElementsByName('showprizes')[0].onchange();
-
-    for (rbuttonID in document.getElementsByName('ganonlogic')) {
-        rbutton = document.getElementsByName('ganonlogic')[rbuttonID]
-        if (rbutton.value == configobj.glogic)
-            rbutton.click();
-    }
-}
-
-function updateConfigFromFirebase(configobj) {
-    var existingConfig = getConfigObjectFromCookie();
-    if(!existingConfig || !existingConfig.ts) {
-        console.log("Overwriting config with Firebase values");
-        setConfigObject(configobj);
-        saveCookie();
-    }
-    else {
-        console.log("Ignoring Firebase config values due to older timestamp");
-    }
-}
-
-function saveConfigToFirebase() {
-    var existingConfig = getConfigObject();
-
-    rootRef.child('config').set(existingConfig);
-
-    console.log("Pushed config to firebase");
-}
-
-function saveCookie() {
-
-    if (cookielock)
-        return;
-    cookielock = true;
-
-    cookieobj = getConfigObject();
-    setCookie(cookieobj);
-
-    cookielock = false
-}
-
-function getConfigObject()
-{
-    configobj = {};
-
-    configobj.map = document.getElementsByName('showmap')[0].checked ? 1 : 0;
-    configobj.iZoom = document.getElementsByName('itemdivsize')[0].value;
-    configobj.mZoom = document.getElementsByName('mapdivsize')[0].value;
-
-    configobj.mPos = document.getElementsByName('mapposition')[1].checked ? 1 : 0;
-
-    configobj.prize = document.getElementsByName('showprizes')[0].checked ? 1 : 0;
-
-    for (rbuttonID in document.getElementsByName('ganonlogic')) {
-        rbutton = document.getElementsByName('ganonlogic')[rbuttonID]
-        if (rbutton.checked)
-            configobj.glogic = rbutton.value;
-    }
-
-    configobj.items = JSON.parse(JSON.stringify(itemLayout));
-
-    return configobj;
-}
 
 // Event of clicking a chest on the map
 function toggleChest(x){
@@ -178,27 +40,27 @@ function refreshChests() {
 
 // Highlights a chest location
 function highlight(x){
-    document.getElementById(x).style.backgroundImage = "url(highlighted.png)";
+    document.getElementById(x).style.backgroundImage = "url(assets/highlighted.png)";
 }
 
 function unhighlight(x){
-    document.getElementById(x).style.backgroundImage = "url(poi.png)";
+    document.getElementById(x).style.backgroundImage = "url(assets/poi.png)";
 }
 
 // Highlights a chest location (but for dungeons)
 function highlightDungeon(x){
-    document.getElementById("dungeon"+x).style.backgroundImage = "url(highlighted.png)";
+    document.getElementById("dungeon"+x).style.backgroundImage = "url(assets/highlighted.png)";
 }
 
 function unhighlightDungeon(x){
     if (dungeonSelect != x)
-        document.getElementById("dungeon"+x).style.backgroundImage = "url(poi.png)";
+        document.getElementById("dungeon"+x).style.backgroundImage = "url(assets/poi.png)";
 }
 
 function clickDungeon(d){
-    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(poi.png)";
+    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(assets/poi.png)";
     dungeonSelect = d;
-    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(highlighted.png)";
+    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(assets/highlighted.png)";
 
     document.getElementById('submaparea').innerHTML = dungeons[dungeonSelect].name;
     document.getElementById('submaparea').className = "DC" + dungeons[dungeonSelect].isBeatable();
@@ -233,8 +95,6 @@ function toggleDungeonChest(sender, d, c){
         sender.className = "DCavailable";     
     else
         sender.className = "DCunavailable";
-
-    //rootRef.child('dungeonchests').child(x).set(!trackerData.chestsopened[x]);    
 
     updateMap();
 }
@@ -280,52 +140,6 @@ function setZoom(target, sender) {
     saveCookie();
 }
 
-function showSettings(sender) {
-    if (trackerOptions.editmode) {
-        var r, c;
-        var startdraw = false;
-        for (r = 7; r >= 0 && !startdraw; r--) {
-            if (!itemLayout[r] || !itemLayout[r].length) {
-                itemGrid[r]['row'].style.display = 'none';
-            } else {
-                for (c = 0; c < 8; c++) {
-                    if (!!itemLayout[r][c] && itemLayout[r][c] != 'blank') {
-                        startdraw = true;
-                        r++;
-                        break;
-                    }
-                }		
-
-                if (!startdraw) {
-                    itemGrid[r]['row'].style.display = 'none';
-                    itemGrid[r]['half'].style.display = 'none';
-                }	
-            }
-        }
-
-        for (; r >= 0; r--) {
-            itemGrid[r]['row'].style.display = '';	
-            itemGrid[r]['button'].style.display = 'none';
-        }
-
-        trackerOptions.editmode = false;
-        updateGridItemAll();
-        showTracker('mapdiv', document.getElementsByName('showmap')[0]);
-        document.getElementById('itemconfig').style.display = 'none';
-
-        sender.innerHTML = '🔧';
-        saveCookie();
-    } else {
-        var x = document.getElementById("settings");
-        if (!x.style.display || x.style.display == 'none') {
-            x.style.display = 'initial';
-            sender.innerHTML = 'X';
-        } else {
-            x.style.display = 'none';		
-            sender.innerHTML = '🔧';
-        } 
-    }
-}
 
 function showTracker(target, sender) {
     if (sender.checked) {
@@ -352,24 +166,6 @@ function clickRowButton(row) {
         itemLayout[row].splice(-1, 1);
     }
     updateGridItem(row, 6);
-}
-
-
-function EditMode() {
-    var r, c;
-
-    for (r = 0; r < 8; r++) {
-        itemGrid[r]['row'].style.display = '';
-        itemGrid[r]['button'].style.display = '';
-    }
-
-    trackerOptions.editmode = true;
-    updateGridItemAll();
-    showTracker('mapdiv', {checked:false});
-    document.getElementById('settings').style.display = 'none';
-    document.getElementById('itemconfig').style.display = '';
-
-    document.getElementById('settingsbutton').innerHTML = 'Exit Edit Mode';
 }
 
 
@@ -440,23 +236,6 @@ function createItemTracker(sender) {
 function updateGridItem(row, index) {
     var item = itemLayout[row][index];
 
-    if (trackerOptions.editmode) {
-        if (!item || item == 'blank') {
-            itemGrid[row][index]['item'].style.backgroundImage = ("url(blank.png)");
-        }
-        else if((typeof trackerData.items[item]) == "boolean"){
-            itemGrid[row][index]['item'].style.backgroundImage = "url(" + item + ".png)";
-        }
-        else{
-            itemGrid[row][index]['item'].style.backgroundImage = "url(" + item + itemsMax[item] + ".png)";
-        }
-
-        itemGrid[row][index]['item'].style.border = '1px solid white';
-        itemGrid[row][index]['item'].style.opacity = 1;
-
-        return;
-    }
-
     itemGrid[row][index]['item'].style.border = '0px';
     itemGrid[row][index]['item'].style.opacity = '';
 
@@ -466,17 +245,17 @@ function updateGridItem(row, index) {
     }
 
     if((typeof trackerData.items[item]) == "boolean"){
-        itemGrid[row][index]['item'].style.backgroundImage = "url(" + item + ".png)";
+        itemGrid[row][index]['item'].style.backgroundImage = "url(assets/" + item + ".png)";
     }
     else{
-        itemGrid[row][index]['item'].style.backgroundImage = "url(" + item + trackerData.items[item] + ".png)";
+        itemGrid[row][index]['item'].style.backgroundImage = "url(assets/" + item + trackerData.items[item] + ".png)";
     }
 
     itemGrid[row][index]['item'].className = "griditem " + (!!trackerData.items[item]);
 
     if (trackerData.medallions[item] !== undefined){
         if (trackerOptions.showprizes)
-            itemGrid[row][index][3].style.backgroundImage = "url(" + dungeonImg[trackerData.medallions[item]] + ".png)";
+            itemGrid[row][index][3].style.backgroundImage = "url(assets/" + dungeonImg[trackerData.medallions[item]] + ".png)";
         else
             itemGrid[row][index][3].style.backgroundImage = "";           
     }
@@ -542,74 +321,9 @@ function initGridRow(itemsets) {
 }
 
 function gridItemClick(row, col, corner) {
-    if (trackerOptions.editmode) {		
-        if (trackerOptions.selected.item) {
-            document.getElementById(trackerOptions.selected.item).style.border = '1px solid white';
-            var old = itemLayout[row][col];
-
-            if (old == trackerOptions.selected.item) {
-                trackerOptions.selected = {};
-                return;
-            }
-
-            if (trackerOptions.selected.item != 'blank') {
-                document.getElementById(trackerOptions.selected.item).style.opacity = 0.25;
-
-                var r,c;
-                var found = false;
-                for (r = 0; r < 8; r++) {
-                    for (c = 0; c < 7; c++) {
-                        if (itemLayout[r][c] == trackerOptions.selected.item) {
-                            itemLayout[r][c] = 'blank';
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (found)
-                        break;
-                }
-            }
-
-            itemLayout[row][col] = trackerOptions.selected.item;
-            updateGridItem(row, col);
-
-            document.getElementById(old).style.opacity = 1;
-
-            trackerOptions.selected = {};
-        } else if (trackerOptions.selected.row !== undefined) {
-            itemGrid[trackerOptions.selected.row][trackerOptions.selected.col]['item'].style.border = '1px solid white';
-
-            var temp = itemLayout[row][col]
-            itemLayout[row][col] = itemLayout[trackerOptions.selected.row][trackerOptions.selected.col];
-            itemLayout[trackerOptions.selected.row][trackerOptions.selected.col] = temp;
-            updateGridItem(row, col);
-            updateGridItem(trackerOptions.selected.row, trackerOptions.selected.col);
-
-            selected = {};
-        } else {
-            itemGrid[row][col]['item'].style.border = '3px solid yellow';
-            trackerOptions.selected = {row:row, col:col};		
-        }
-        return;
-    }
-
     var item = itemLayout[row][col];
 
-    if(trackerData.medallions[item] !== undefined && trackerOptions.showprizes){
-        if (corner == 3) {
-            var newVal = trackerData.medallions[item] + 1;
-                if(newVal >= 9){
-                    newVal = 0;
-                }
-
-            rootRef.child('medallions').child(item).set(newVal);
-        } 
-        else {
-            rootRef.child('items').child(item).set(!trackerData.items[item]);
-        }
-    }
-    else if((typeof trackerData.items[item]) == "boolean"){
+    if((typeof trackerData.items[item]) == "boolean"){
         rootRef.child('items').child(item).set(!trackerData.items[item]);
     }
     else{
@@ -719,7 +433,7 @@ function populateMapdiv() {
     // Initialize all chests on the map
     for(k=0; k<chests.length; k++){
         var s = document.createElement('span');
-        s.style.backgroundImage = 'url(poi.png)';
+        s.style.backgroundImage = 'url(assets/poi.png)';
         s.style.color = 'black';
         s.id = k;
         s.onclick = new Function('toggleChest('+k+')');
@@ -783,7 +497,7 @@ function populateMapdiv() {
 
     document.getElementById('submaparea').innerHTML = dungeons[dungeonSelect].name;
     document.getElementById('submaparea').className = "DC" + dungeons[dungeonSelect].isBeatable();
-    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(highlighted.png)";
+    document.getElementById("dungeon"+dungeonSelect).style.backgroundImage = "url(assets/highlighted.png)";
     for (var key in dungeons[dungeonSelect].chestlist) {
         var s = document.createElement('li');
         s.innerHTML = key
@@ -824,10 +538,10 @@ function populateItemconfig() {
         rowitem.style.backgroundSize = '100% 100%';
         rowitem.onclick = new Function('itemConfigClick(this)');
         if((typeof trackerData.items[key]) == "boolean"){
-            rowitem.style.backgroundImage = "url(" + key + ".png)";
+            rowitem.style.backgroundImage = "url(assets/" + key + ".png)";
         }
         else{
-            rowitem.style.backgroundImage = "url(" + key + itemsMax[key] + ".png)";
+            rowitem.style.backgroundImage = "url(assets/" + key + itemsMax[key] + ".png)";
         }
         row.appendChild(rowitem);
     }		
@@ -852,51 +566,8 @@ function isBridgeOpen() {
     return false;
 }
 
-function enterPasscode() {
-    var passcode = document.getElementById('entryPasscodeInput').value;
-    rootRef.child('editors').child(uid).set(passcode, function(error) {
-        if(error) {
-            console.log("Did not add to editors");
-            console.log(error);
-        }
-        else {
-            console.log("Added to editors successfully");
-        }
-    });
-}
-
-function createRoom() {
-    var editors = {};
-    var passcode = document.getElementById('passcodeInput').value;
-    editors[uid] = true;
-    rootRef.set({
-        owner: uid,
-        editors: editors,
-        passcode: passcode,
-        items: itemsInit,
-        dungeonchests: dungeonchestsInit,
-        medallions: medallionsInit,
-        chestsopened: chestsopenedInit
-    });
-}
-
-function resetFirebase() {
-    rootRef.child('items').set(itemsInit);
-    rootRef.child('dungeonchests').set(dungeonchestsInit);
-    rootRef.child('medallions').set(medallionsInit);
-    rootRef.child('chestsopened').set(chestsopenedInit);
-}
-
-function useTourneyConfig() {
-  firebase.database().ref('games/tourney-layout/config').once('value', function(snapshot) {
-    let val = snapshot.val();
-    updateConfigFromFirebase(val);
-    saveConfigToFirebase();
-  });
-}
 
 function initTracker() {
-    console.log('vinihan - in inittracker')
     createItemTracker(document.getElementById('itemdiv'));
     populateMapdiv();
     populateItemconfig();
@@ -909,8 +580,6 @@ function initTracker() {
     rootRef.child('items').on('value', function(snapshot) {
         trackerData.items = snapshot.val();
         updateAll();
-        document.getElementById('createRoomPanel').hidden = !!trackerData.items;
-        roomCreated = !!trackerData.items;
     });
     rootRef.child('dungeonchests').on('value', function(snapshot) {
         trackerData.dungeonchests = snapshot.val();
@@ -924,50 +593,7 @@ function initTracker() {
         trackerData.chestsopened = snapshot.val();
         updateAll();
     });
-    rootRef.child('config').on('value', function(snapshot) {
-       if(snapshot.val()) updateConfigFromFirebase(snapshot.val());
-    });
 
-
-    setTimeout(() => {
-        if (g_password === "")
-            return;
-
-        console.log("Override password set, handle it");
-
-        if (roomCreated == false) //create room
-        {
-            console.log("attempt to create room");
-
-            var editors = {};
-            editors[uid] = true;
-
-            rootRef.set({
-                owner: uid,
-                editors: editors,
-                passcode: g_password,
-                items: itemsInit,
-                dungeonchests: dungeonchestsInit,
-                medallions: medallionsInit,
-                chestsopened: chestsopenedInit
-            });
-
-            console.log("Created new room due password set in url");
-        }
-        else //add to editors if room already exists
-        {
-            rootRef.child('editors').child(uid).set(g_password, function(error) {
-                if(error) {
-                    console.log("Did not add to editors on page load");
-                    console.log(error);
-                }
-                else {
-                    console.log("Added to editors successfully due password set in url");
-                }
-            });
-        }
-
-    }, 6000);
 }
 
 function updateAll() {
@@ -977,7 +603,6 @@ function updateAll() {
 }
 
 function refreshMap() {
-  //refreshMapMedallions();
   updateGridItemAll();
   refreshChests();
 
@@ -991,30 +616,23 @@ function refreshMap() {
   updateMap();
 }
 
-function confirmSaveConfigToFirebase() {
-    var confirm = window.confirm("Do you want to push your configuration to all other users of your tracker? This will overwrite their settings. (Use this to get a remote browser to match how this browser appears.)");
-    if(confirm) {
-        saveConfigToFirebase();
-    }
-}
-
 function preloader() {
     for (item in trackerData.items) {
         if((typeof trackerData.items[item]) == "boolean") {
             var img = new Image();
-            img.src = "" + item + ".png";
+            img.src = "assets/" + item + ".png";
         }
         else{
             for (i = itemsMin[item]; i < itemsMax[item]; i++) {
                 var img = new Image();
-                img.src = "" + item + i + ".png";
+                img.src = "assets/" + item + i + ".png";
             }
         }
     }
 
     for (medallion in dungeonImg) {
         var img = new Image();
-        img.src = "" + dungeonImg[medallion] + ".png";
+        img.src = "assets/" + dungeonImg[medallion] + ".png";
     }
 }
 function addLoadEvent(func) {
