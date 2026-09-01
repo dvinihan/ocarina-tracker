@@ -154,6 +154,69 @@ label {
     left: 0px;
 }
 
+.notesdiv {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 400px;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    z-index: 9;
+}
+
+.notesheader {
+    background-color: rgb(40, 40, 40);
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.notestoggle {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+}
+
+.notestoggle:hover {
+    color: #ccc;
+}
+
+.notestext {
+    flex: 1;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    border: none;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 12px;
+    resize: none;
+    outline: none;
+}
+
+.notestext::placeholder {
+    color: rgb(100, 100, 100);
+}
+
+.notesdiv.collapsed .notestext {
+    display: none;
+}
+
+.notesdiv.collapsed {
+    height: auto;
+}
+
 .chest {
     width: 16px;
     height: 16px;

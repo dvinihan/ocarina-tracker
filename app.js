@@ -686,11 +686,40 @@ function bindEvents() {
     });
 }
 
+function initNotes() {
+    const notesDiv = document.getElementById('notesdiv');
+    const notesText = document.getElementById('notestext');
+    const notesToggle = document.getElementById('notestoggle');
+
+    // Load notes from localStorage
+    const savedNotes = localStorage.getItem('trackerNotes') || '';
+    notesText.value = savedNotes;
+
+    // Save notes on input
+    notesText.oninput = () => {
+        localStorage.setItem('trackerNotes', notesText.value);
+    };
+
+    // Toggle collapse/expand
+    notesToggle.onclick = (e) => {
+        e.stopPropagation();
+        notesDiv.classList.toggle('collapsed');
+        notesToggle.innerHTML = notesDiv.classList.contains('collapsed') ? '+' : '−';
+    };
+
+    // Also allow clicking the header to toggle
+    document.querySelector('.notesheader').onclick = () => {
+        notesDiv.classList.toggle('collapsed');
+        notesToggle.innerHTML = notesDiv.classList.contains('collapsed') ? '+' : '−';
+    };
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
     createItemTracker(document.getElementById('itemdiv'));
     populateMapdiv();
     populateItemconfig();
     bindEvents();
+    initNotes();
     
     await loadState();
 });
