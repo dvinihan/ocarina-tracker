@@ -6,7 +6,6 @@ let chestsopenedInit = new Array(chests.length).fill(false);
 
 let trackerOptions = {
     showprizes: true,
-    editmode: false,
     selected: {}
 };
 
@@ -245,48 +244,14 @@ function setZoom(target, sender) {
 
 function showSettings() {
     const sender = document.getElementById('settingsbutton');
-    if (trackerOptions.editmode) {
-        let r, c;
-        let startdraw = false;
-        for (r = 7; r >= 0 && !startdraw; r--) {
-            if (!itemLayout[r] || !itemLayout[r].length) {
-                itemGrid[r]['row'].style.display = 'none';
-            } else {
-                for (c = 0; c < 8; c++) {
-                    if (!!itemLayout[r][c] && itemLayout[r][c] !== 'blank') {
-                        startdraw = true;
-                        r++;
-                        break;
-                    }
-                }		
-                if (!startdraw) {
-                    itemGrid[r]['row'].style.display = 'none';
-                    itemGrid[r]['half'].style.display = 'none';
-                }	
-            }
-        }
-
-        for (; r >= 0; r--) {
-            itemGrid[r]['row'].style.display = '';	
-            itemGrid[r]['button'].style.display = 'none';
-        }
-
-        trackerOptions.editmode = false;
-        updateGridItemAll();
-        showTracker('mapdiv', document.getElementById('showmap'));
-        document.getElementById('itemconfig').style.display = 'none';
-        sender.innerHTML = '🔧';
-        saveState();
+    const x = document.getElementById("settings");
+    if (!x.style.display || x.style.display === 'none') {
+        x.style.display = 'initial';
+        sender.innerHTML = 'X';
     } else {
-        const x = document.getElementById("settings");
-        if (!x.style.display || x.style.display === 'none') {
-            x.style.display = 'initial';
-            sender.innerHTML = 'X';
-        } else {
-            x.style.display = 'none';		
-            sender.innerHTML = '🔧';
-        } 
-    }
+        x.style.display = 'none';		
+        sender.innerHTML = '🔧';
+    } 
 }
 
 function showTracker(target, sender) {
@@ -313,18 +278,7 @@ function clickRowButton(row) {
     updateGridItem(row, 6);
 }
 
-function EditMode() {
-    for (let r = 0; r < 8; r++) {
-        itemGrid[r]['row'].style.display = '';
-        itemGrid[r]['button'].style.display = '';
-    }
-    trackerOptions.editmode = true;
-    updateGridItemAll();
-    showTracker('mapdiv', { checked: false });
-    document.getElementById('settings').style.display = 'none';
-    document.getElementById('itemconfig').style.display = '';
-    document.getElementById('settingsbutton').innerHTML = 'Exit Edit Mode';
-}
+
 
 function createItemTracker(sender) {
     for (let r = 0; r < 8; r++) {
@@ -387,19 +341,6 @@ function createItemTracker(sender) {
 
 function updateGridItem(row, index) {
     const item = itemLayout[row][index];
-
-    if (trackerOptions.editmode) {
-        if (!item || item === 'blank') {
-            itemGrid[row][index]['item'].style.backgroundImage = "url('assets/blank.png')";
-        } else if (typeof trackerData.items[item] === "boolean") {
-            itemGrid[row][index]['item'].style.backgroundImage = `url('assets/${item}.png')`;
-        } else {
-            itemGrid[row][index]['item'].style.backgroundImage = `url('assets/${item}${itemsMax[item]}.png')`;
-        }
-        itemGrid[row][index]['item'].style.border = '1px solid white';
-        itemGrid[row][index]['item'].style.opacity = 1;
-        return;
-    }
 
     itemGrid[row][index]['item'].style.border = '0px';
     itemGrid[row][index]['item'].style.opacity = '';
@@ -483,54 +424,6 @@ function initGridRow(itemsets) {
 }
 
 function gridItemClick(row, col, corner) {
-    if (trackerOptions.editmode) {		
-        if (trackerOptions.selected.item) {
-            document.getElementById(trackerOptions.selected.item).style.border = '1px solid white';
-            let old = itemLayout[row][col];
-            if (old === trackerOptions.selected.item) {
-                trackerOptions.selected = {};
-                return;
-            }
-
-            if (trackerOptions.selected.item !== 'blank') {
-                document.getElementById(trackerOptions.selected.item).style.opacity = 0.25;
-                let found = false;
-                for (let r = 0; r < 8; r++) {
-                    for (let c = 0; c < 7; c++) {
-                        if (itemLayout[r][c] === trackerOptions.selected.item) {
-                            itemLayout[r][c] = 'blank';
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found) break;
-                }
-            }
-
-            itemLayout[row][col] = trackerOptions.selected.item;
-            updateGridItem(row, col);
-
-            if (document.getElementById(old)) {
-                document.getElementById(old).style.opacity = 1;
-            }
-            trackerOptions.selected = {};
-        } else if (trackerOptions.selected.row !== undefined) {
-            itemGrid[trackerOptions.selected.row][trackerOptions.selected.col]['item'].style.border = '1px solid white';
-
-            let temp = itemLayout[row][col];
-            itemLayout[row][col] = itemLayout[trackerOptions.selected.row][trackerOptions.selected.col];
-            itemLayout[trackerOptions.selected.row][trackerOptions.selected.col] = temp;
-            updateGridItem(row, col);
-            updateGridItem(trackerOptions.selected.row, trackerOptions.selected.col);
-
-            trackerOptions.selected = {};
-        } else {
-            itemGrid[row][col]['item'].style.border = '3px solid yellow';
-            trackerOptions.selected = { row: row, col: col };		
-        }
-        return;
-    }
-
     const item = itemLayout[row][col];
 
     if (trackerData.medallions[item] !== undefined && trackerOptions.showprizes) {
@@ -772,7 +665,6 @@ function refreshMap() {
 
 function bindEvents() {
     document.getElementById('settingsbutton').onclick = showSettings;
-    document.getElementById('btnEditMode').onclick = EditMode;
     document.getElementById('btnResetTracker').onclick = async () => {
         if (confirm("Reset all local tracker progress?")) {
             await LocalStorageDB.clear();
