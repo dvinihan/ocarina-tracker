@@ -47,11 +47,6 @@ body {
     background-size: 64px 64px;
 }
 
-.tracker .halfcell {
-    width: 32px;
-    height: 64px;	
-}
-
 .itemconfig {
     border-spacing: 0px;
     border: 1px solid white;	

@@ -258,25 +258,7 @@ function showTracker(target, sender) {
     document.getElementById(target).style.display = sender.checked ? '' : 'none';
 }
 
-function clickRowButton(row) {
-    if (itemLayout[row].length % 2 === 0) {
-        itemGrid[row]['button'].innerHTML = '-';
-        itemGrid[row]['button'].style.backgroundColor = 'red';
-        itemGrid[row][6]['item'].style.display = '';
-        itemGrid[row]['half'].style.display = 'none';	
-        itemLayout[row][6] = 'blank';
-    } else {
-        itemGrid[row]['button'].innerHTML = '+';
-        itemGrid[row]['button'].style.backgroundColor = 'green';
-        itemGrid[row][6]['item'].style.display = 'none';
-        itemGrid[row]['half'].style.display = '';	
-        if (document.getElementById(itemLayout[row][6])) {
-            document.getElementById(itemLayout[row][6]).style.opacity = 1;
-        }
-        itemLayout[row].splice(-1, 1);
-    }
-    updateGridItem(row, 6);
-}
+
 
 
 
@@ -291,10 +273,6 @@ function createItemTracker(sender) {
 
         const tr = document.createElement('tr');
         itemGrid[r]['row'].appendChild(tr);
-
-        itemGrid[r]['half'] = document.createElement('td');
-        itemGrid[r]['half'].className = 'halfcell';
-        tr.appendChild(itemGrid[r]['half']);
 
         for (let i = 0; i < 7; i++) {	
             itemGrid[r][i] = [];
@@ -327,15 +305,6 @@ function createItemTracker(sender) {
             }
         }
 
-        const half = document.createElement('td');
-        half.className = 'halfcell';
-        tr.appendChild(half);
-        itemGrid[r]['button'] = document.createElement('button');
-        itemGrid[r]['button'].innerHTML = '-';
-        itemGrid[r]['button'].style.backgroundColor = 'red';		
-        itemGrid[r]['button'].style.color = 'white';	
-        itemGrid[r]['button'].onclick = () => clickRowButton(r);
-        half.appendChild(itemGrid[r]['button']);
     }
 }
 
@@ -386,39 +355,32 @@ function setGridItem(item, row, index) {
 function initGridRow(itemsets) {
     let r, c;
     let startdraw = false;
+
     for (r = 7; r >= 0 && !startdraw; r--) {
         if (!itemsets[r] || !itemsets[r].length) {
             itemGrid[r]['row'].style.display = 'none';
-            itemGrid[r]['half'].style.display = 'none';
         } else {
-            for (c = 0; c < 8; c++) {
+            for (c = 0; c < 7; c++) {
                 if (!!itemsets[r][c] && itemsets[r][c] !== 'blank') {
                     startdraw = true;
                     r++;
                     break;
                 }
-            }	
+            }
+
             if (!startdraw) {
                 itemGrid[r]['row'].style.display = 'none';
-                itemGrid[r]['half'].style.display = 'none';
-            }			
+            }
         }
     }
 
     for (; r >= 0; r--) {
-        itemGrid[r]['row'].style.display = '';	
-        if (itemsets[r].length % 2 !== 0) {
-            itemGrid[r]['half'].style.display = 'none';
-            itemGrid[r][6]['item'].style.display = '';
-        } else {
-            clickRowButton(r);
-        }
-        itemGrid[r]['button'].style.display = 'none';
+        itemGrid[r]['row'].style.display = '';
 
         for (c = 0; c < 7; c++) {
             if (itemsets[r][c]) {
                 setGridItem(itemsets[r][c], r, c);
-            } 
+            }
         }
     }
 }
