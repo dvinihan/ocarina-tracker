@@ -174,6 +174,19 @@ function unhighlightDungeon(x) {
     }
 }
 
+function closeLocationTooltips() {
+    document.querySelectorAll('.mapspan.tooltip-visible').forEach((location) => {
+        location.classList.remove('tooltip-visible');
+    });
+}
+
+function toggleLocationTooltip(event) {
+    if (event.pointerType === 'mouse') return;
+
+    closeLocationTooltips();
+    event.currentTarget.classList.toggle('tooltip-visible');
+}
+
 function clickDungeon(d) {
     document.getElementById("dungeon" + dungeonSelect).style.backgroundImage = "url('assets/poi.png')";
     dungeonSelect = d;
@@ -511,6 +524,7 @@ function populateMapdiv() {
         s.style.color = 'black';
         s.id = 'chest-' + k;
         s.onclick = () => toggleChest(k);
+        s.onpointerdown = toggleLocationTooltip;
         s.onmouseover = () => highlight(k);
         s.onmouseout = () => unhighlight(k);
         s.style.left = chests[k].x;
@@ -532,6 +546,7 @@ function populateMapdiv() {
         s.style.backgroundImage = 'url(assets/poi.png)';
         s.id = 'dungeon' + k;
         s.onclick = () => clickDungeon(k);
+        s.onpointerdown = toggleLocationTooltip;
         s.onmouseover = () => highlightDungeon(k);
         s.onmouseout = () => unhighlightDungeon(k);
         s.style.left = dungeons[k].x;
@@ -626,6 +641,12 @@ function refreshMap() {
 }
 
 function bindEvents() {
+    document.addEventListener('pointerdown', (event) => {
+        if (!(event.target instanceof Element) || !event.target.closest('.mapspan')) {
+            closeLocationTooltips();
+        }
+    });
+
     document.getElementById('settingsbutton').onclick = showSettings;
     document.getElementById('btnResetTracker').onclick = async () => {
         if (confirm("Reset all local tracker progress?")) {

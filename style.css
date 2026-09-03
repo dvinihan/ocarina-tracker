@@ -248,7 +248,7 @@ label {
     margin-left: -60px;
 }
 
-.mapspan:hover .tooltipgray {
+.mapspan.tooltip-visible .tooltipgray {
     visibility: visible;
 }
 
@@ -278,6 +278,13 @@ label {
     border-color: black transparent transparent transparent;
 }
 
-.mapspan:hover .tooltip {
+.mapspan.tooltip-visible .tooltip {
     visibility: visible;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .mapspan:hover .tooltipgray,
+    .mapspan:hover .tooltip {
+        visibility: visible;
+    }
 }
