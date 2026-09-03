@@ -52,7 +52,8 @@ const defaultSettings = {
     map: 1,
     iZoom: 100,
     mZoom: 100,
-    mPos: 0,
+    mPos: 1,
+    layoutVersion: 1,
     glogic: 'Open',
     prize: 1,
     items: defaultItemGrid,
@@ -95,6 +96,7 @@ async function loadState() {
 
 function setConfigObject(configobj) {
     const items = configobj.items || defaultItemGrid;
+    const mapPosition = configobj.layoutVersion === undefined ? 1 : configobj.mPos;
     initGridRow(JSON.parse(JSON.stringify(items)));
 
     document.getElementById('showmap').checked = !!configobj.map;
@@ -107,8 +109,8 @@ function setConfigObject(configobj) {
     setZoom('mapdiv', document.getElementById('mapdivsize'));
 
     const mappos = document.getElementsByName('mapposition');
-    if (mappos[configobj.mPos]) mappos[configobj.mPos].checked = true;
-    setOrder(configobj.mPos === 0);
+    if (mappos[mapPosition]) mappos[mapPosition].checked = true;
+    setOrder(mapPosition === 0);
 
     document.getElementById('showprizes').checked = !!configobj.prize;
     trackerOptions.showprizes = !!configobj.prize;
@@ -129,6 +131,7 @@ function getConfigObject() {
     configobj.iZoom = document.getElementById('itemdivsize').value;
     configobj.mZoom = document.getElementById('mapdivsize').value;
     configobj.mPos = document.getElementsByName('mapposition')[1].checked ? 1 : 0;
+    configobj.layoutVersion = 1;
     configobj.prize = document.getElementById('showprizes').checked ? 1 : 0;
 
     for (let rbutton of document.getElementsByName('ganonlogic')) {
@@ -149,9 +152,11 @@ function refreshChests() {
     for (let k = 0; k < chests.length; k++) {
         const el = document.getElementById('chest-' + k);
         if (el) {
+            const tooltipVisible = el.classList.contains('tooltip-visible');
             el.className = trackerData.chestsopened[k] 
                 ? "mapspan chest opened" 
                 : "mapspan chest " + chests[k].isAvailable();
+            if (tooltipVisible) el.classList.add('tooltip-visible');
         }
     }
 }
@@ -425,13 +430,19 @@ function updateMap() {
     for (let k = 0; k < chests.length; k++) {
         if (!trackerData.chestsopened[k]) {
             const el = document.getElementById('chest-' + k);
-            if (el) el.className = "mapspan chest " + chests[k].isAvailable();
+            if (el) {
+                const tooltipVisible = el.classList.contains('tooltip-visible');
+                el.className = "mapspan chest " + chests[k].isAvailable();
+                if (tooltipVisible) el.classList.add('tooltip-visible');
+            }
         }
     }
     for (let k = 0; k < dungeons.length; k++) {
         const el = document.getElementById("dungeon" + k);
         if (el) {
+            const tooltipVisible = el.classList.contains('tooltip-visible');
             el.className = "mapspan dungeon " + dungeons[k].canGetChest();
+            if (tooltipVisible) el.classList.add('tooltip-visible');
             let DCcount = 0;
             for (let key in dungeons[k].chestlist) {
                 if (dungeons[k].chestlist.hasOwnProperty(key)) {
@@ -631,10 +642,13 @@ function refreshMap() {
     refreshChests();
 
     for (let k = 0; k < dungeons.length; k++) {
+        const el = document.getElementById("dungeon" + k);
+        const tooltipVisible = el.classList.contains('tooltip-visible');
         if (trackerData.dungeonchests[k])
             document.getElementById("dungeon" + k).className = "mapspan dungeon " + dungeons[k].canGetChest();
         else
             document.getElementById("dungeon" + k).className = "mapspan dungeon opened";
+        if (tooltipVisible) el.classList.add('tooltip-visible');
     }
 
     updateMap();
