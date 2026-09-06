@@ -139,16 +139,6 @@ label {
     margin-top: 206px;
 }
 
-.mapvdiv {
-    background-image: url("assets/mapv.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-    width: 438px;
-    height: 888px;
-    left: 0px;
-}
-
 .notesdiv {
     position: relative;
     width: 100%;
