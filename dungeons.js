@@ -303,8 +303,8 @@ var dungeons = [
         chestlist: {
             "Zelda's Lullaby": { isAvailable: () => true },
             'Child Shooting Gallery (ch)': { isAvailable: () => true },
-            'Bombchu Bowling 1': { isAvailable: () => trackerData.items.Bombs },
-            'Bombchu Bowling 2': { isAvailable: () => trackerData.items.Bombs },
+            'Bombchu Bowling 1 (ch)': { isAvailable: () => trackerData.items.Bombs },
+            'Bombchu Bowling 2 (ch)': { isAvailable: () => trackerData.items.Bombs },
             'Treasure Chest Game (ch)': { isAvailable: () => trackerData.items.Lens && trackerData.items.Magic },
             'Dog Lady (ch)': { isAvailable: () => true },
             '10 Big Poes (ad)': { isAvailable: () => trackerData.items.Bow && trackerData.items.EponasSong && trackerData.items.Bottle },
@@ -384,7 +384,7 @@ var dungeons = [
             'Diving Minigame (ch)': { isAvailable: () => (trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale },
             'Zoras Domain Torch Run (ch)': { isAvailable: () => (trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale },
             'Fairy Fountain': { isAvailable: () => trackerData.items.ZoraLetter && trackerData.items.Bombs && trackerData.items.ZeldasLullaby },
-            'Iceberg Heart Piece': { isAvailable: () => trackerData.items.ZoraLetter && (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZeldasLullaby },
+            'Iceberg Heart Piece (ad)': { isAvailable: () => trackerData.items.ZoraLetter && (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZeldasLullaby },
             'Underwater Heart Piece (ad)': { isAvailable: () => trackerData.items.ZoraLetter && (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.IronBoots && trackerData.items.ZeldasLullaby },
             'King Zora Thawed (ad)': { isAvailable: () => trackerData.items.ZeldasLullaby && trackerData.items.Bottle && ((trackerData.items.ZoraLetter && (trackerData.items.Bombs || trackerData.items.Scale)) || isBridgeOpen() || trackerData.items.Wallet) }
         },
