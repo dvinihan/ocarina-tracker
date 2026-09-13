@@ -665,6 +665,7 @@ function bindEvents() {
     document.getElementById('btnResetTracker').onclick = async () => {
         if (confirm("Reset all local tracker progress?")) {
             await LocalStorageDB.clear();
+            localStorage.removeItem('trackerNotes');
             window.location.reload();
         }
     };
