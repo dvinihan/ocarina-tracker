@@ -1,4 +1,4 @@
-let ganonlogic = 'Open';
+let ganonlogic = 'Medallions';
 
 function isBridgeOpen() {
     switch (ganonlogic) {
