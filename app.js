@@ -54,7 +54,7 @@ const defaultSettings = {
     mZoom: 100,
     mPos: 1,
     layoutVersion: 1,
-    glogic: 'Open',
+    glogic: 'Medallions',
     prize: 1,
     items: defaultItemGrid,
     trackerData: trackerData
