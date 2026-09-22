@@ -409,7 +409,7 @@ function gridItemClick(row, col, corner) {
     if (trackerData.medallions[item] !== undefined && trackerOptions.showprizes) {
         if (corner === 3) {
             let newVal = trackerData.medallions[item] + 1;
-            if (newVal >= 9) newVal = 0;
+            if (newVal >= 10) newVal = 0;
             trackerData.medallions[item] = newVal;
         } else {
             trackerData.items[item] = !trackerData.items[item];

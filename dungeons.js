@@ -233,10 +233,10 @@ var dungeons = [
     {
         name: "Ice Cavern (ad)", x: "90.5%", y: "16.0%",
         chestlist: {
-            'Map Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
-            'Compass Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
-            'Heart Piece': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
-            'Iron Boots Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
+            'Elevated Walkway Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
+            'Left Visible Item': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
+            'Right Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
+            'Wolfos in Space Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle },
             'Sheik in Ice Cavern': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.ZeldasLullaby && trackerData.items.Bottle }
         },
         isBeatable: function() { return this.canGetChest(); },
@@ -251,12 +251,12 @@ var dungeons = [
             'Outside Hookshot Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Well Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Block Push Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow },
-            'Falling Room Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) },
             'Boss Key Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow },
             'Floormaster Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
-            'Bow Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Red Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow },
+            'Bow Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Blue Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow },
+            'Falling Room Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) },
             'Near Boss Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow },
             'Phantom Ganon': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow }
         },
@@ -324,7 +324,7 @@ var dungeons = [
             'Kakariko Grotto Chest': { isAvailable: () => true },
             'Kakariko Redead Grotto Chest': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer },
             'Cow Heart Piece': { isAvailable: () => true },
-            'Man on Roof (ad)': { isAvailable: () => trackerData.items.Hookshot },
+            'Man on Roof (ad)': { isAvailable: () => true },
             'Adult Shooting Gallery (ad)': { isAvailable: () => trackerData.items.Bow },
             'Song of Storms (ad)': { isAvailable: () => true },
             'Windmill Heart Piece': { isAvailable: () => trackerData.items.SongofTime || trackerData.items.Boomerang },

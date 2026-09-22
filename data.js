@@ -7,7 +7,7 @@ const defaultItemGrid = [
     ["Slingshot", "Boomerang", "Lens", "Bottle", "ZoraLetter", "Wallet", "Skulltula"],
     ["ZeldasLullaby", "EponasSong", "SunsSong", "SariasSong", "SongofTime", "SongofStorms"],
     ["MinuetofForest", "BoleroofFire", "SerenadeofWater", "NocturneofShadow", "RequiemofSpirit", "PreludeofLight"],
-    ["ForestMedallion", "FireMedallion", "WaterMedallion", "ShadowMedallion", "SpiritMedallion", "LightMedallion"],
+    ["LightMedallion", "ForestMedallion", "FireMedallion", "WaterMedallion", "ShadowMedallion", "SpiritMedallion"],
     ["blank", "blank", "KokiriEmerald", "GoronRuby", "ZoraSapphire", "blank", "blank"]
 ];
 
@@ -31,7 +31,7 @@ const dungeonchestsInit = {
 
 const medallionsInit = {
     ForestMedallion: 0, FireMedallion: 0, WaterMedallion: 0, ShadowMedallion: 0,
-    SpiritMedallion: 0, LightMedallion: 0, KokiriEmerald: 0, GoronRuby: 0, ZoraSapphire: 0
+    SpiritMedallion: 0, LightMedallion: 0, KokiriEmerald: 0, GoronRuby: 0, ZoraSapphire: 0, TOT: 0
 };
 
 const itemsMin = { Bow:0, Slingshot:0, Bombs:0, Hookshot:0, Ocarina:1, Bottle:0, Glove:0, Scale:0, Magic:0, Wallet:0, Skulltula:0 };
