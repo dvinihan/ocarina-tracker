@@ -1,4 +1,4 @@
-const dungeonImg = ['Unknown', 'dungeon1', 'dungeon2', 'dungeon3', 'dungeon4', 'dungeon5', 'dungeon6', 'dungeon7', 'dungeon8'];
+const dungeonImg = ['Unknown', 'dungeon1', 'dungeon2', 'dungeon3', 'dungeon4', 'dungeon5', 'dungeon6', 'dungeon7', 'dungeon8', 'dungeon9'];
 
 const defaultItemGrid = [
     ["Bow", "Hookshot", "Hammer", "Bombs", "Scale", "Glove"],
