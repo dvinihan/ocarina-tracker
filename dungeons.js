@@ -141,24 +141,24 @@ var dungeons = [
     {
         name: "Shadow Temple (ad)", x: "76.0%", y: "21.0%",
         chestlist: {
-            'First Redead Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && (trackerData.items.HoverBoots || trackerData.items.Hookshot) },
-            'Dead Hand Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && (trackerData.items.HoverBoots || trackerData.items.Hookshot) },
-            '2 Gibdo Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots },
-            'Early Silver Rupee Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots },
-            'Invisible Blades Visible Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs },
-            'Invisible Blades Invisible Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs },
-            'Falling Spikes Lower Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs },
-            'Falling Spikes Upper Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Glove },
-            'Falling Spikes Switch Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Glove },
-            'Invisible Spikes Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs },
-            'Giant Pot Key': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
-            'Wind Hint Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
-            'After Wind Enemy Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
-            'After Wind Hidden Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
-            'Spike Walls Left Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
-            'Spike Walls Right Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
-            'Hidden Floormaster Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
-            'Bongo Bongo': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby && trackerData.items.Bow }
+            'First Redead Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && (trackerData.items.HoverBoots || trackerData.items.Hookshot) },
+            'Dead Hand Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && (trackerData.items.HoverBoots || trackerData.items.Hookshot) },
+            '2 Gibdo Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots },
+            'Early Silver Rupee Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots },
+            'Invisible Blades Visible Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs },
+            'Invisible Blades Invisible Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs },
+            'Falling Spikes Lower Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs },
+            'Falling Spikes Upper Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Glove },
+            'Falling Spikes Switch Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Glove },
+            'Invisible Spikes Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs },
+            'Giant Pot Key': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
+            'Wind Hint Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
+            'After Wind Enemy Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
+            'After Wind Hidden Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot },
+            'Spike Walls Left Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
+            'Spike Walls Right Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
+            'Hidden Floormaster Chest': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby },
+            'Bongo Bongo': { isAvailable: () => trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby && trackerData.items.Bow }
         },
         isBeatable: function() {
             if(trackerData.items.NocturneofShadow && trackerData.items.Dins && trackerData.items.Magic && trackerData.items.Lens && trackerData.items.HoverBoots && trackerData.items.Bombs && trackerData.items.Hookshot && trackerData.items.Glove && trackerData.items.ZeldasLullaby && trackerData.items.Bow) {
@@ -217,10 +217,10 @@ var dungeons = [
     {
         name: "Jabu Jabu's Belly (ch)", x: "91.5%", y: "21.0%",
         chestlist: {
-            'Boomerang Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Bottle && (trackerData.items.Slingshot || trackerData.items.Bombs || trackerData.items.Boomerang) },
-            'Map Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Bottle && trackerData.items.Boomerang },
-            'Compass Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Bottle && trackerData.items.Boomerang },
-            'Barinade': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Bottle && trackerData.items.Boomerang }
+            'Right Room (Stingray) Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && (trackerData.items.Slingshot || trackerData.items.Bombs || trackerData.items.Boomerang) },
+            'Left Room (Tentacle) Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Boomerang },
+            'Second Room from Left (Tentacle) Chest': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Boomerang },
+            'Barinade': { isAvailable: () => ((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Boomerang }
         },
         isBeatable: function() {
             if(((trackerData.items.Bombs && trackerData.items.ZeldasLullaby) || trackerData.items.Scale) && trackerData.items.ZoraLetter && trackerData.items.Bottle && trackerData.items.Boomerang) {
@@ -333,8 +333,8 @@ var dungeons = [
             'Dampe Digging (ch)': { isAvailable: () => true },
             'Shield Grave Chest': { isAvailable: () => true },
             'Redead Grave Chest': { isAvailable: () => trackerData.items.SunsSong },
-            "Sun's Song": { isAvailable: () => trackerData.items.ZeldasLullaby },
-            "Sun's Song Chest": { isAvailable: () => trackerData.items.ZeldasLullaby && ((trackerData.items.Dins || (trackerData.items.Fire && trackerData.items.Bow)) && trackerData.items.Magic) },
+            "Royal Tomb Song": { isAvailable: () => trackerData.items.ZeldasLullaby },
+            "Royal Tomb Torches Chest": { isAvailable: () => trackerData.items.ZeldasLullaby && ((trackerData.items.Dins || (trackerData.items.Fire && trackerData.items.Bow)) && trackerData.items.Magic) },
             'Magic Bean Heart Piece (ad)': { isAvailable: () => trackerData.items.Scale || trackerData.items.Bombs || trackerData.items.Hookshot >= 2 },
             'Nocturne of Shadow (ad)': { isAvailable: () => trackerData.items.ForestMedallion && trackerData.items.FireMedallion && trackerData.items.WaterMedallion },
             'Skulltula House 10': { isAvailable: () => trackerData.items.Skulltula >= 1 },
