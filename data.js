@@ -1,7 +1,7 @@
 const dungeonImg = ['Unknown', 'dungeon1', 'dungeon2', 'dungeon3', 'dungeon4', 'dungeon5', 'dungeon6', 'dungeon7', 'dungeon8', 'dungeon9'];
 
 const defaultItemGrid = [
-    ["Bow", "Hookshot", "Hammer", "Bombs", "Scale", "Glove"],
+    ["Bow", "Hookshot", "Hammer", "Bombs", "Scale", "Glove", "GerudoCard"],
     ["KokiriSword", "BiggoronSword", "MirrorShield", "ZoraTunic", "GoronTunic", "IronBoots", "HoverBoots"],
     ["Dins", "Farores", "Nayrus", "Magic", "Fire", "Ice", "Light"],
     ["Slingshot", "Boomerang", "Lens", "Bottle", "ZoraLetter", "Wallet", "Skulltula"],
@@ -12,7 +12,7 @@ const defaultItemGrid = [
 ];
 
 const itemsInit = {
-    Bow:0, Hookshot:0, Hammer:false, Slingshot:0, Boomerang:false, Bombs:0, Lens:false,
+    GerudoCard:false, Bow:0, Hookshot:0, Hammer:false, Slingshot:0, Boomerang:false, Bombs:0, Lens:false,
     Dins:false, Farores:false, Nayrus:false, Fire:false, Ice:false, Light:false,
     Ocarina:1, Bottle:0, Wallet:0, Skulltula:0, KokiriSword:false, BiggoronSword:false,
     MirrorShield:false, GoronTunic:false, ZoraTunic:false, IronBoots:false, HoverBoots:false,
