@@ -57,7 +57,7 @@ var dungeons = [
         canGetChest: function() { return generalCanGetChest(this.chestlist); }
     },
     {
-        name: "Gerudo Training Grounds (ad)", x: "18.8%", y: "28.0%",
+        name: "Gerudo Training Grounds (ad)", x: "18.8%", y: "30.0%",
         chestlist: {
             'Lobby Left Chest': { isAvailable: () => trackerData.items.GerudoCard && trackerData.items.Bow },
             'Lobby Right Chest': { isAvailable: () => trackerData.items.GerudoCard && trackerData.items.Bow },
@@ -452,7 +452,7 @@ const checkRegions = [
     { name: "Lon Lon Ranch", x: "47.0%", y: "43.0%" },
     { name: "Lake Hylia", x: "40.0%", y: "80.0%" },
     { name: "Gerudo Valley", x: "23.5%", y: "37.0%" },
-    { name: "Gerudo Fortress", x: "19.0%", y: "25.5%" },
+    { name: "Gerudo Fortress", x: "19.0%", y: "23.5%" },
     { name: "Haunted Wasteland", x: "14.0%", y: "25.0%" },
     { name: "Desert Colossus", x: "6.5%", y: "20.5%" },
     { name: "Zora River", x: "81.0%", y: "31.0%" }
