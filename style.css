@@ -104,7 +104,8 @@ label {
     z-index: 2;
 }
 
-.dungeon {
+.dungeon,
+.region {
     width: 24px;
     height: 24px;
     background-size: 100% 100%;
@@ -235,6 +236,7 @@ label {
     bottom: 120%;
     left: 50%;
     margin-left: -60px;
+    pointer-events: none;
 }
 
 .mapspan.tooltip-visible .tooltipgray {
@@ -254,6 +256,7 @@ label {
     bottom: 170%;
     left: 50%;
     margin-left: -60px;
+    pointer-events: none;
 }
 
 .mapspan .tooltip::after {
