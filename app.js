@@ -1,6 +1,7 @@
 let itemGrid = [];
 let itemLayout = [];
 let dungeonSelect = 0;
+let regionSelect = null;
 
 let chestsopenedInit = new Array(chests.length).fill(false);
 
@@ -143,39 +144,31 @@ function getConfigObject() {
 
 function toggleChest(x) {
     trackerData.chestsopened[x] = !trackerData.chestsopened[x];
-    refreshChests();
     updateMap();
     saveState();
 }
 
-function refreshChests() {
-    for (let k = 0; k < chests.length; k++) {
-        const el = document.getElementById('chest-' + k);
-        if (el) {
-            const tooltipVisible = el.classList.contains('tooltip-visible');
-            el.className = trackerData.chestsopened[k] 
-                ? "mapspan chest opened" 
-                : "mapspan chest " + chests[k].isAvailable();
-            if (tooltipVisible) el.classList.add('tooltip-visible');
-        }
-    }
-}
-
-function highlight(x) {
-    document.getElementById('chest-' + x).style.backgroundImage = "url('assets/highlighted.png')";
-}
-
-function unhighlight(x) {
-    document.getElementById('chest-' + x).style.backgroundImage = "url('assets/poi.png')";
-}
-
 function highlightDungeon(x) {
-    document.getElementById("dungeon" + x).style.backgroundImage = "url('assets/highlighted.png')";
+    const marker = document.getElementById("dungeon" + x);
+    if (marker) marker.style.backgroundImage = "url('assets/highlighted.png')";
 }
 
 function unhighlightDungeon(x) {
     if (dungeonSelect !== x) {
-        document.getElementById("dungeon" + x).style.backgroundImage = "url('assets/poi.png')";
+        const marker = document.getElementById("dungeon" + x);
+        if (marker) marker.style.backgroundImage = "url('assets/poi.png')";
+    }
+}
+
+function highlightRegion(x) {
+    const marker = document.getElementById("region" + x);
+    if (marker) marker.style.backgroundImage = "url('assets/highlighted.png')";
+}
+
+function unhighlightRegion(x) {
+    if (regionSelect !== x) {
+        const marker = document.getElementById("region" + x);
+        if (marker) marker.style.backgroundImage = "url('assets/poi.png')";
     }
 }
 
@@ -193,30 +186,77 @@ function toggleLocationTooltip(event) {
 }
 
 function clickDungeon(d) {
-    document.getElementById("dungeon" + dungeonSelect).style.backgroundImage = "url('assets/poi.png')";
+    const previousDungeon = document.getElementById("dungeon" + dungeonSelect);
+    if (previousDungeon) previousDungeon.style.backgroundImage = "url('assets/poi.png')";
+    if (regionSelect !== null) {
+        document.getElementById("region" + regionSelect).style.backgroundImage = "url('assets/poi.png')";
+    }
     dungeonSelect = d;
+    regionSelect = null;
     document.getElementById("dungeon" + dungeonSelect).style.backgroundImage = "url('assets/highlighted.png')";
 
-    document.getElementById('submaparea').innerHTML = dungeons[dungeonSelect].name;
-    document.getElementById('submaparea').className = "DC" + dungeons[dungeonSelect].isBeatable();
-    
-    const DClist = document.getElementById('submaplist');
-    DClist.innerHTML = "";
+    renderDungeonDetails();
+}
 
-    for (let key in dungeons[dungeonSelect].chestlist) {
-        let s = document.createElement('li');
-        s.innerHTML = key;
+function clickRegion(regionIndex) {
+    const previousDungeon = document.getElementById("dungeon" + dungeonSelect);
+    if (previousDungeon) previousDungeon.style.backgroundImage = "url('assets/poi.png')";
+    if (regionSelect !== null) {
+        document.getElementById("region" + regionSelect).style.backgroundImage = "url('assets/poi.png')";
+    }
+    dungeonSelect = null;
+    regionSelect = regionIndex;
+    document.getElementById("region" + regionSelect).style.backgroundImage = "url('assets/highlighted.png')";
+    renderRegionDetails();
+}
 
-        if (dungeons[dungeonSelect].chestlist[key].isOpened) s.className = "DCopened";               
-        else if (dungeons[dungeonSelect].chestlist[key].isAvailable()) s.className = "DCavailable";               
-        else s.className = "DCunavailable";               
+function renderDungeonDetails() {
+    const dungeon = dungeons[dungeonSelect];
+    document.getElementById('submaparea').textContent = dungeon.name;
+    document.getElementById('submaparea').className = "DC" + dungeon.isBeatable();
 
-        s.onclick = () => toggleDungeonChest(s, dungeonSelect, key);
-        s.onmouseover = () => s.style.backgroundColor = "#282828";
-        s.onmouseout = () => s.style.backgroundColor = "";
-        s.style.cursor = "pointer";
+    const list = document.getElementById('submaplist');
+    list.innerHTML = "";
+    for (const [name, check] of Object.entries(dungeon.chestlist)) {
+        const item = document.createElement('li');
+        item.textContent = name;
+        item.className = check.isOpened ? "DCopened" : check.isAvailable() ? "DCavailable" : "DCunavailable";
+        item.onclick = () => toggleDungeonChest(item, dungeonSelect, name);
+        list.appendChild(item);
+    }
+}
 
-        DClist.appendChild(s);
+function getRegionStatus(region) {
+    const unopened = region.checks.filter((index) => !trackerData.chestsopened[index]);
+    if (unopened.length === 0) return "opened";
+    const available = unopened.filter((index) => chests[index].isAvailable() === "available").length;
+    if (available === unopened.length) return "available";
+    if (available === 0) return "unavailable";
+    return "possible";
+}
+
+function getRegionAvailableCount(region) {
+    return region.checks.filter((index) =>
+        !trackerData.chestsopened[index] && chests[index].isAvailable() === "available"
+    ).length;
+}
+
+function renderRegionDetails() {
+    const region = checkRegions[regionSelect];
+    document.getElementById('submaparea').textContent = region.name;
+    document.getElementById('submaparea').className = "DC" + getRegionStatus(region);
+
+    const list = document.getElementById('submaplist');
+    list.innerHTML = "";
+    for (const index of region.checks) {
+        const check = chests[index];
+        const item = document.createElement('li');
+        item.textContent = check.name;
+        item.className = trackerData.chestsopened[index]
+            ? "DCopened"
+            : check.isAvailable() === "available" ? "DCavailable" : "DCunavailable";
+        item.onclick = () => toggleChest(index);
+        list.appendChild(item);
     }
 }
 
@@ -427,16 +467,6 @@ function gridItemClick(row, col, corner) {
 }
 
 function updateMap() {
-    for (let k = 0; k < chests.length; k++) {
-        if (!trackerData.chestsopened[k]) {
-            const el = document.getElementById('chest-' + k);
-            if (el) {
-                const tooltipVisible = el.classList.contains('tooltip-visible');
-                el.className = "mapspan chest " + chests[k].isAvailable();
-                if (tooltipVisible) el.classList.add('tooltip-visible');
-            }
-        }
-    }
     for (let k = 0; k < dungeons.length; k++) {
         const el = document.getElementById("dungeon" + k);
         if (el) {
@@ -462,22 +492,22 @@ function updateMap() {
         }
     }
 
-    const submaparea = document.getElementById('submaparea');
-    if (submaparea) {
-        submaparea.className = "DC" + dungeons[dungeonSelect].isBeatable();
-    }
-
-    const itemlist = document.getElementById('submaplist').children;
-    for (let item in itemlist) {
-        if (itemlist.hasOwnProperty(item)) {
-            const chestObj = dungeons[dungeonSelect].chestlist[itemlist[item].innerHTML];
-            if (chestObj) {
-                if (chestObj.isOpened) itemlist[item].className = "DCopened";            
-                else if (chestObj.isAvailable()) itemlist[item].className = "DCavailable";        
-                else itemlist[item].className = "DCunavailable";                
-            }
+    for (let k = 0; k < checkRegions.length; k++) {
+        const region = checkRegions[k];
+        const el = document.getElementById("region" + k);
+        if (!el) continue;
+        const tooltipVisible = el.classList.contains('tooltip-visible');
+        el.className = "mapspan region " + getRegionStatus(region);
+        if (tooltipVisible) el.classList.add('tooltip-visible');
+        const count = el.querySelector('.chestCount');
+        if (count) {
+            const available = getRegionAvailableCount(region);
+            count.textContent = available === 0 ? "" : available;
         }
     }
+
+    if (regionSelect !== null) renderRegionDetails();
+    else if (dungeonSelect !== null) renderDungeonDetails();
 }
 
 function itemConfigClick(sender) {
@@ -529,29 +559,6 @@ function itemConfigClick(sender) {
 function populateMapdiv() {
     const mapdiv = document.getElementById('mapdiv');
 
-    for (let k = 0; k < chests.length; k++) {
-        let s = document.createElement('span');
-        s.style.backgroundImage = 'url(assets/poi.png)';
-        s.style.color = 'black';
-        s.id = 'chest-' + k;
-        s.onclick = () => toggleChest(k);
-        s.onpointerdown = toggleLocationTooltip;
-        s.onmouseover = () => highlight(k);
-        s.onmouseout = () => unhighlight(k);
-        s.style.left = chests[k].x;
-        s.style.top = chests[k].y;
-        s.className = trackerData.chestsopened[k] 
-            ? "mapspan chest opened" 
-            : "mapspan chest " + chests[k].isAvailable();
-
-        let ss = document.createElement('span');
-        ss.className = "tooltip";
-        ss.innerHTML = chests[k].name;
-        s.appendChild(ss);
-
-        mapdiv.appendChild(s);
-    }
-
     for (let k = 0; k < dungeons.length; k++) {
         let s = document.createElement('span');
         s.style.backgroundImage = 'url(assets/poi.png)';
@@ -589,25 +596,37 @@ function populateMapdiv() {
         mapdiv.appendChild(s);
     }
 
-    document.getElementById('submaparea').innerHTML = dungeons[dungeonSelect].name;
-    document.getElementById('submaparea').className = "DC" + dungeons[dungeonSelect].isBeatable();
-    document.getElementById("dungeon" + dungeonSelect).style.backgroundImage = "url(assets/highlighted.png)";
+    for (let k = 0; k < checkRegions.length; k++) {
+        const region = checkRegions[k];
+        const marker = document.createElement('span');
+        marker.style.backgroundImage = 'url(assets/poi.png)';
+        marker.id = 'region' + k;
+        marker.onclick = () => clickRegion(k);
+        marker.onpointerdown = toggleLocationTooltip;
+        marker.onmouseover = () => highlightRegion(k);
+        marker.onmouseout = () => unhighlightRegion(k);
+        marker.style.left = region.x;
+        marker.style.top = region.y;
+        marker.className = "mapspan region " + getRegionStatus(region);
 
-    for (let key in dungeons[dungeonSelect].chestlist) {
-        let s = document.createElement('li');
-        s.innerHTML = key;
+        const count = document.createElement('span');
+        count.className = "chestCount";
+        const available = getRegionAvailableCount(region);
+        count.textContent = available === 0 ? "" : available;
+        count.style.color = "black";
+        count.style.display = "inline-block";
+        count.style.lineHeight = "24px";
+        marker.style.textAlign = "center";
+        marker.appendChild(count);
 
-        if (dungeons[dungeonSelect].chestlist[key].isOpened) s.className = "DCopened";               
-        else if (dungeons[dungeonSelect].chestlist[key].isAvailable()) s.className = "DCavailable";               
-        else s.className = "DCunavailable";               
-
-        s.onclick = () => toggleDungeonChest(s, dungeonSelect, key);
-        s.onmouseover = () => s.style.backgroundColor = "#282828";
-        s.onmouseout = () => s.style.backgroundColor = "";
-        s.style.cursor = "pointer";
-
-        document.getElementById('submaplist').appendChild(s);
+        const tooltip = document.createElement('span');
+        tooltip.className = "tooltipgray";
+        tooltip.textContent = region.name;
+        marker.appendChild(tooltip);
+        mapdiv.appendChild(marker);
     }
+
+    clickDungeon(dungeonSelect);
 }
 
 function populateItemconfig() {
@@ -639,10 +658,10 @@ function populateItemconfig() {
 
 function refreshMap() {
     updateGridItemAll();
-    refreshChests();
 
     for (let k = 0; k < dungeons.length; k++) {
         const el = document.getElementById("dungeon" + k);
+        if (!el) continue;
         const tooltipVisible = el.classList.contains('tooltip-visible');
         if (trackerData.dungeonchests[k])
             document.getElementById("dungeon" + k).className = "mapspan dungeon " + dungeons[k].canGetChest();
