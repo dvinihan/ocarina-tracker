@@ -36,12 +36,12 @@ var dungeons = [
     {
         name: "Water Temple (ad)", x: "36.1%", y: "91.0%",
         chestlist: {
-            'Map Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
-            'Compass Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
+            'First Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
+            'Crystal Switch Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
             'Torches Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) && trackerData.items.ZeldasLullaby },
             'Dragon Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && trackerData.items.SongofTime && trackerData.items.Bow },
             'Central Bow Target Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove && trackerData.items.ZeldasLullaby && (trackerData.items.HoverBoots || trackerData.items.Hookshot >= 2) },
-            'Boss Key Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && ((trackerData.items.Bombs && trackerData.items.Glove) || trackerData.items.HoverBoots) && trackerData.items.Hookshot >= 2 },
+            'Water Way Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && ((trackerData.items.Bombs && trackerData.items.Glove) || trackerData.items.HoverBoots) && trackerData.items.Hookshot >= 2 },
             'Central Pillar Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby },
             'Cracked Wall Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bombs && trackerData.items.ZeldasLullaby },
             'Dark Link Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby },
@@ -250,15 +250,15 @@ var dungeons = [
             'Between Courtyards Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Outside Hookshot Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
             'Well Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
-            'Block Push Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 2 },
-            'Boss Key Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 2},
+            'Block Push Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 1 },
+            'Boss Key Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 1},
             'Floormaster Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot },
-            'Red Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 2 },
-            'Bow Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Glove >= 2},
-            'Blue Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 2},
-            'Falling Room Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) && trackerData.items.Glove >= 2 },
-            'Near Boss Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow && trackerData.items.Glove >= 2},
-            'Phantom Ganon': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow && trackerData.items.Glove >= 2}
+            'Red Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 1 },
+            'Bow Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Glove >= 1},
+            'Blue Poe Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove >= 1},
+            'Falling Room Chest': { isAvailable: () => ((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) && trackerData.items.Glove >= 1 },
+            'Near Boss Chest': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow && trackerData.items.Glove >= 1},
+            'Phantom Ganon': { isAvailable: () => (trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow && trackerData.items.Glove >= 1}
         },
         isBeatable: function() {
             if((trackerData.items.SariasSong || trackerData.items.MinuetofForest) && trackerData.items.Hookshot && trackerData.items.Bow) {
@@ -305,7 +305,7 @@ var dungeons = [
             'Child Shooting Gallery (ch)': { isAvailable: () => true },
             'Bombchu Bowling 1 (ch)': { isAvailable: () => trackerData.items.Bombs },
             'Bombchu Bowling 2 (ch)': { isAvailable: () => trackerData.items.Bombs },
-            'Treasure Chest Game (ch)': { isAvailable: () => trackerData.items.Lens && trackerData.items.Magic },
+            'Treasure Chest Game (ch)': { isAvailable: () => true },
             'Dog Lady (ch)': { isAvailable: () => true },
             '10 Big Poes (ad)': { isAvailable: () => trackerData.items.Bow && trackerData.items.EponasSong && trackerData.items.Bottle },
             'Hyrule Castle Fairy (ch)': { isAvailable: () => trackerData.items.Bombs && trackerData.items.ZeldasLullaby },
