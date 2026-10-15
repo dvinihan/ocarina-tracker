@@ -37,13 +37,13 @@ var dungeons = [
         name: "Water Temple (ad)", x: "36.1%", y: "91.0%",
         chestlist: {
             'First Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
-            'Crystal Switch Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
+            'Cracked Wall Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bombs && trackerData.items.ZeldasLullaby },
             'Torches Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && (trackerData.items.Bow || (trackerData.items.Dins && trackerData.items.Magic)) && trackerData.items.ZeldasLullaby },
             'Dragon Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && trackerData.items.SongofTime && trackerData.items.Bow },
-            'Central Bow Target Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove && trackerData.items.ZeldasLullaby && (trackerData.items.HoverBoots || trackerData.items.Hookshot >= 2) },
-            'Water Way Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && ((trackerData.items.Bombs && trackerData.items.Glove) || trackerData.items.HoverBoots) && trackerData.items.Hookshot >= 2 },
             'Central Pillar Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby },
-            'Cracked Wall Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bombs && trackerData.items.ZeldasLullaby },
+            'Crystal Switch Chest': { isAvailable: () => trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot },
+            'Eye Switch Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.Bow && trackerData.items.Glove && trackerData.items.ZeldasLullaby && (trackerData.items.HoverBoots || trackerData.items.Hookshot >= 2) },
+            'Water Way Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby && ((trackerData.items.Bombs && trackerData.items.Glove) || trackerData.items.HoverBoots) && trackerData.items.Hookshot >= 2 },
             'Dark Link Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.ZeldasLullaby },
             'River Chest': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot) && trackerData.items.SongofTime && trackerData.items.Bow && trackerData.items.ZeldasLullaby },
             'Morpha': { isAvailable: () => (trackerData.items.ZoraTunic && trackerData.items.IronBoots && trackerData.items.Hookshot >= 2) }
@@ -120,20 +120,20 @@ var dungeons = [
     {
         name: "Bottom of the Well (ch)", x: "68.0%", y: "23.0%",
         chestlist: {
+            'Back Left Bombable': { isAvailable: () => trackerData.items.SongofStorms && (trackerData.items.ZeldasLullaby || trackerData.items.Scale) },
+            'Underwater Left Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
+            'Coffin Key': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.Bombs },
+            'Center Small Chest': { isAvailable: () => trackerData.items.SongofStorms },
             'Front Left Hidden Wall': { isAvailable: () => trackerData.items.SongofStorms},
             'Front Center Bombable': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.Bombs },
+            'Invisible Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
+            'Defeat Boss': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby && trackerData.items.KokiriSword },
+            'Underwater Front Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
             'Right Bottom Hidden Wall': { isAvailable: () => trackerData.items.SongofStorms },
             'Center Large Chest': { isAvailable: () => trackerData.items.SongofStorms },
-            'Center Small Chest': { isAvailable: () => trackerData.items.SongofStorms },
-            'Back Left Bombable': { isAvailable: () => trackerData.items.SongofStorms && (trackerData.items.ZeldasLullaby || trackerData.items.Scale) },
-            'Coffin Key': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.Bombs },
-            'Defeat Boss': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby && trackerData.items.KokiriSword },
-            'Invisible Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
-            'Underwater Front Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
-            'Underwater Left Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.ZeldasLullaby },
-            'Basement Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.Bombs },
             'Locked Pits': { isAvailable: () => trackerData.items.SongofStorms  },
-            'Behind Right Grate': { isAvailable: () => trackerData.items.SongofStorms }
+            'Behind Right Grate': { isAvailable: () => trackerData.items.SongofStorms },
+            'Basement Chest': { isAvailable: () => trackerData.items.SongofStorms && trackerData.items.Bombs },
         },
         isBeatable: function() { return this.canGetChest(); },
         canGetChest: function() { return generalCanGetChest(this.chestlist); }
@@ -174,10 +174,10 @@ var dungeons = [
             'Left Side Main Room Chest': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer || trackerData.items.Glove },
             'Near Huge Stairs Chest': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer || trackerData.items.Glove },
             'Spike Trap Platform Chest': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer || trackerData.items.Glove },
-            'End of First Bridge Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Hammer || trackerData.items.Glove) && (trackerData.items.Slingshot || trackerData.items.Bow || trackerData.items.HoverBoots) },
-            'End of Second Bridge Chest': { isAvailable: () => (trackerData.items.Slingshot || trackerData.items.Bow || trackerData.items.HoverBoots) && (trackerData.items.Bombs || ((trackerData.items.Bow || trackerData.items.HoverBoots) && trackerData.items.Hammer)) },
-            'Chest Above King Dodongo': { isAvailable: () => (trackerData.items.Slingshot || trackerData.items.Bow || trackerData.items.HoverBoots) && trackerData.items.Bombs },
-            'King Dodongo': { isAvailable: () => (trackerData.items.Slingshot || trackerData.items.Bow || trackerData.items.HoverBoots) && trackerData.items.Bombs }
+            'End of First Bridge Chest': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Hammer || trackerData.items.Glove) },
+            'End of Second Bridge Chest': { isAvailable: () => (trackerData.items.Bombs || ((trackerData.items.Bow || trackerData.items.HoverBoots) && trackerData.items.Hammer)) },
+            'Chest Above King Dodongo': { isAvailable: () => trackerData.items.Bombs },
+            'King Dodongo': { isAvailable: () => trackerData.items.Bombs }
         },
         isBeatable: function() {
             if((trackerData.items.Slingshot || trackerData.items.Bow || trackerData.items.HoverBoots) && trackerData.items.Bombs) {
@@ -371,7 +371,7 @@ var dungeons = [
             'Deku Salesman Grotto': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer },
             'Wolfos Grotto Chest': { isAvailable: () => trackerData.items.Bombs || (trackerData.items.Hammer && (trackerData.items.SariasSong || trackerData.items.MinuetofForest)) },
             "Saria's Song (ch)": { isAvailable: () => true },
-            'Minuet of Forest (ad)': { isAvailable: () => trackerData.items.SariasSong || trackerData.items.MinuetofForest },
+            'Minuet of Forest (ad)': { isAvailable: () => true },
             'Deku Theater Skull Mask (ch)': { isAvailable: () => true },
             'Deku Theater Mask of Truth (ch)': { isAvailable: () => trackerData.items.SariasSong && trackerData.items.KokiriEmerald && trackerData.items.GoronRuby && trackerData.items.ZoraSapphire }
         },
@@ -442,7 +442,7 @@ const chests = [
     { name: "Frog Ocarina Game (ch)", area: "Zora River", isAvailable: () => ((trackerData.items.Scale || trackerData.items.Bombs) && trackerData.items.ZeldasLullaby && trackerData.items.SariasSong && trackerData.items.SunsSong && trackerData.items.EponasSong && trackerData.items.SongofTime && trackerData.items.SongofStorms) ? "available" : "unavailable" },
     { name: "Frogs in the Rain (ch)", area: "Zora River", isAvailable: () => ((trackerData.items.Scale || trackerData.items.Bombs) && trackerData.items.SongofStorms) ? "available" : "unavailable" },
     { name: "Zora River Heart Piece 1", area: "Zora River", isAvailable: () => (trackerData.items.Scale || trackerData.items.Bombs || trackerData.items.HoverBoots) ? "available" : "unavailable" },
-    { name: "Zora River Heart Piece 2", area: "Zora River", isAvailable: () => (trackerData.items.Scale || trackerData.items.Bombs || trackerData.items.HoverBoots) ? "available" : "unavailable" },
+    { name: "Zora River Heart Piece 2", area: "Zora River", isAvailable: () => "available" },
     { name: "Zora River Grotto", area: "Zora River", isAvailable: () => "available" }
 ];
 
