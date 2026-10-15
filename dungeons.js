@@ -23,7 +23,7 @@ var dungeons = [
             '3 Pillars Chest': { isAvailable: () => true },
             '3 Pillars Side Chest': { isAvailable: () => true },
             'Basement Chest': { isAvailable: () => true },
-            'Gohma': { isAvailable: () => trackerData.items.Slingshot }
+            'Gohma': { isAvailable: () => true }
         },
         isBeatable: function() {
             if(trackerData.items.Slingshot) {
@@ -403,7 +403,7 @@ var dungeons = [
             'Crater Grotto': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer },
             'Crater Fairy Fountain (ad)': { isAvailable: () => trackerData.items.Hammer && trackerData.items.ZeldasLullaby && (trackerData.items.Glove || (trackerData.items.BoleroofFire && trackerData.items.Hookshot) || trackerData.items.HoverBoots) },
             'Summit Fairy Fountain': { isAvailable: () => (trackerData.items.Bombs || trackerData.items.Hammer) && trackerData.items.ZeldasLullaby },
-            'Biggoron Sword (ad)': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer || (trackerData.items.BoleroofFire && (trackerData.items.HoverBoots || trackerData.items.Hookshot)) || trackerData.items.Glove }
+            'Biggoron Sword (ad)': { isAvailable: () => trackerData.items.ClaimCheck && (trackerData.items.Bombs || trackerData.items.Hammer || (trackerData.items.BoleroofFire && (trackerData.items.HoverBoots || trackerData.items.Hookshot)) || trackerData.items.Glove) }
         },
         isBeatable: function() { return this.canGetChest(); },
         canGetChest: function() { return generalCanGetChest(this.chestlist); }
@@ -432,6 +432,7 @@ const chests = [
     { name: "Gerudo Valley Hammer Rocks Chest (ad)", area: "Gerudo Valley", isAvailable: () => (trackerData.items.GerudoCard && trackerData.items.Hammer) ? "available" : "unavailable" },
     { name: "Gerudo Valley Crate Heart Piece", area: "Gerudo Valley", isAvailable: () => "available" },
     { name: "Gerudo Valley Waterfall Heart Piece", area: "Gerudo Valley", isAvailable: () => "available" },
+    { name: "Free the Carpenter (ad)", area: "Gerudo Fortress", isAvailable: () => (trackerData.items.GerudoCard || trackerData.items.EponasSong || trackerData.items.Hookshot >= 2) ? "available" : "unavailable" },
     { name: "Gerudo Fortress Rooftop Chest (ad)", area: "Gerudo Fortress", isAvailable: () => ((trackerData.items.GerudoCard || trackerData.items.EponasSong || trackerData.items.Hookshot >= 2) && trackerData.items.HoverBoots || trackerData.items.Hookshot >= 2) ? "available" : "unavailable" },
     { name: "Horseback Archery Game 1000pts (ad)", area: "Gerudo Fortress", isAvailable: () => (trackerData.items.GerudoCard && trackerData.items.EponasSong && trackerData.items.Bow) ? "available" : "unavailable" },
     { name: "Horseback Archery Game 1500pts (ad)", area: "Gerudo Fortress", isAvailable: () => (trackerData.items.GerudoCard && trackerData.items.EponasSong && trackerData.items.Bow) ? "available" : "unavailable" },

@@ -5,7 +5,7 @@ const defaultItemGrid = [
     ["KokiriSword", "BiggoronSword", "MirrorShield", "ZoraTunic", "GoronTunic", "IronBoots", "HoverBoots"],
     ["Dins", "Farores", "Nayrus", "Magic", "Fire", "Ice", "Light"],
     ["Slingshot", "Boomerang", "Lens", "Bottle", "ZoraLetter", "Wallet", "Skulltula"],
-    ["ZeldasLullaby", "EponasSong", "SunsSong", "SariasSong", "SongofTime", "SongofStorms"],
+    ["ZeldasLullaby", "EponasSong", "SunsSong", "SariasSong", "SongofTime", "SongofStorms", "ClaimCheck"],
     ["MinuetofForest", "BoleroofFire", "SerenadeofWater", "NocturneofShadow", "RequiemofSpirit", "PreludeofLight"],
     ["LightMedallion", "ForestMedallion", "FireMedallion", "WaterMedallion", "ShadowMedallion", "SpiritMedallion"],
     ["blank", "blank", "KokiriEmerald", "GoronRuby", "ZoraSapphire", "blank", "blank"]
@@ -17,7 +17,7 @@ const itemsInit = {
     Ocarina:1, Bottle:0, Wallet:0, Skulltula:0, KokiriSword:false, BiggoronSword:false,
     MirrorShield:false, GoronTunic:false, ZoraTunic:false, IronBoots:false, HoverBoots:false,
     Glove:0, Scale:0, StoneofAgony:false, Magic:0, ZoraLetter:false, ZeldasLullaby:false,
-    EponasSong:false, SunsSong:false, SariasSong:false, SongofTime:false, SongofStorms:false,
+    EponasSong:false, SunsSong:false, SariasSong:false, SongofTime:false, SongofStorms:false, ClaimCheck:false,
     MinuetofForest:false, PreludeofLight:false, BoleroofFire:false, SerenadeofWater:false,
     NocturneofShadow:false, RequiemofSpirit:false, KokiriEmerald:false, GoronRuby:false,
     ZoraSapphire:false, ForestMedallion:false, FireMedallion:false, WaterMedallion:false,
