@@ -394,7 +394,7 @@ var dungeons = [
     {
         name: "Death Mountain", x: "64.0%", y: "09.0%",
         chestlist: {
-            'Heart Piece Above Dodongo Cavern': { isAvailable: () => trackerData.items.Bombs || (trackerData.items.Glove && trackerData.items.Scale) },
+            'Heart Piece Above Dodongo Cavern': { isAvailable: () => true },
             'Outside Goron City Chest': { isAvailable: () => trackerData.items.Bombs || trackerData.items.Hammer },
             'Outside Goron City Grotto': { isAvailable: () => trackerData.items.SongofStorms },
             'Bolero of Fire (ad)': { isAvailable: () => trackerData.items.BoleroofFire || (trackerData.items.HoverBoots && (trackerData.items.Hammer || trackerData.items.Bombs || trackerData.items.Glove)) || (trackerData.items.Hookshot && trackerData.items.Glove) },
