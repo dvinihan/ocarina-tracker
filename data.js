@@ -16,7 +16,7 @@ const itemsInit = {
     Dins:false, Farores:false, Nayrus:false, Fire:false, Ice:false, Light:false,
     Ocarina:1, Bottle:0, Wallet:0, Skulltula:0, KokiriSword:false, BiggoronSword:false,
     MirrorShield:false, GoronTunic:false, ZoraTunic:false, IronBoots:false, HoverBoots:false,
-    Glove:0, Scale:0, StoneofAgony:false, Magic:0, ZoraLetter:false, ZeldasLullaby:false,
+    Glove:0, Scale:0, StoneofAgony:false, Magic:0, ZoraLetter:false, ZeldasLullaby:true,
     EponasSong:false, SunsSong:false, SariasSong:false, SongofTime:false, SongofStorms:false, ClaimCheck:false,
     MinuetofForest:false, PreludeofLight:false, BoleroofFire:false, SerenadeofWater:false,
     NocturneofShadow:false, RequiemofSpirit:false, KokiriEmerald:false, GoronRuby:false,
